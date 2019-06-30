@@ -1,26 +1,18 @@
-from collections import namedtuple
+from board_game import BoardGame
 
 
-class ScrabbleBoard:
-
-    # Scrabble Constants
-
-    # Board Dimensions
+class ScrabbleBoard(BoardGame):
 
     BOARD_X = 15
     BOARD_Y = 15
 
-    # Square Types
-
-    SquareMultiplier = namedtuple("SquareMultiplier", "letter word")
-
     SQUARE_TYPES = {
-        "PLAIN": SquareMultiplier(1, 1),
-        "STAR": SquareMultiplier(1, 1),
-        "DLS": SquareMultiplier(2, 1),
-        "DWS": SquareMultiplier(1, 2),
-        "TLS": SquareMultiplier(3, 1),
-        "TWS": SquareMultiplier(1, 3)
+        "PLAIN": BoardGame.SquareMultiplier(1, 1),
+        "STAR": BoardGame.SquareMultiplier(1, 1),
+        "DLS": BoardGame.SquareMultiplier(2, 1),
+        "DWS": BoardGame.SquareMultiplier(1, 2),
+        "TLS": BoardGame.SquareMultiplier(3, 1),
+        "TWS": BoardGame.SquareMultiplier(1, 3)
     }
 
     SQUARE_COORDS = {
@@ -48,67 +40,35 @@ class ScrabbleBoard:
         ]
     }
 
-    # Tiles
-
-    Tile = namedtuple("Tile", "count value")
-
     TILES = {
-        ' ': Tile(2, 0),
-        'A': Tile(9, 1),
-        'B': Tile(2, 3),
-        'C': Tile(2, 3),
-        'D': Tile(4, 2),
-        'E': Tile(12, 1),
-        'F': Tile(2, 4),
-        'G': Tile(3, 2),
-        'H': Tile(2, 4),
-        'I': Tile(9, 1),
-        'J': Tile(1, 8),
-        'K': Tile(1, 5),
-        'L': Tile(4, 1),
-        'M': Tile(2, 3),
-        'N': Tile(6, 1),
-        'O': Tile(8, 1),
-        'P': Tile(2, 3),
-        'Q': Tile(1, 10),
-        'R': Tile(6, 1),
-        'S': Tile(4, 1),
-        'T': Tile(6, 1),
-        'U': Tile(4, 1),
-        'V': Tile(2, 4),
-        'W': Tile(2, 4),
-        'X': Tile(1, 8),
-        'Y': Tile(2, 4),
-        'Z': Tile(1, 10)
+        ' ': BoardGame.Tile(2, 0),
+        'A': BoardGame.Tile(9, 1),
+        'B': BoardGame.Tile(2, 3),
+        'C': BoardGame.Tile(2, 3),
+        'D': BoardGame.Tile(4, 2),
+        'E': BoardGame.Tile(12, 1),
+        'F': BoardGame.Tile(2, 4),
+        'G': BoardGame.Tile(3, 2),
+        'H': BoardGame.Tile(2, 4),
+        'I': BoardGame.Tile(9, 1),
+        'J': BoardGame.Tile(1, 8),
+        'K': BoardGame.Tile(1, 5),
+        'L': BoardGame.Tile(4, 1),
+        'M': BoardGame.Tile(2, 3),
+        'N': BoardGame.Tile(6, 1),
+        'O': BoardGame.Tile(8, 1),
+        'P': BoardGame.Tile(2, 3),
+        'Q': BoardGame.Tile(1, 10),
+        'R': BoardGame.Tile(6, 1),
+        'S': BoardGame.Tile(4, 1),
+        'T': BoardGame.Tile(6, 1),
+        'U': BoardGame.Tile(4, 1),
+        'V': BoardGame.Tile(2, 4),
+        'W': BoardGame.Tile(2, 4),
+        'X': BoardGame.Tile(1, 8),
+        'Y': BoardGame.Tile(2, 4),
+        'Z': BoardGame.Tile(1, 10)
     }
 
-    Square = namedtuple("Square", "tile type")
-
     def __init__(self):
-        self.board = []
-        self.__populate_board()
-
-    def __populate_board(self):
-
-        # Populate with PLAIN squares
-
-        for i in range(self.BOARD_Y):
-            row = []
-            for j in range(self.BOARD_X):
-                square = self.Square(None, "PLAIN")
-                row.append(square)
-            self.board.append(row)
-
-        # Populate special types
-
-        for square_type in self.SQUARE_COORDS:
-
-            for y, x in self.SQUARE_COORDS[square_type]:
-                # Quadrant 1
-                self.board[y][self.BOARD_X - 1 - x] = self.Square(None, square_type)
-                # Quadrant 2
-                self.board[y][x] = self.Square(None, square_type)
-                # Quadrant 3
-                self.board[self.BOARD_Y - 1 - y][x] = self.Square(None, square_type)
-                # Quadrant 4
-                self.board[self.BOARD_Y - 1 - y][self.BOARD_X - 1 - x] = self.Square(None, square_type)
+        super().__init__("PLAIN")
