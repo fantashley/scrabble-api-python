@@ -6,7 +6,7 @@ class BoardGame:
     # Board coordinates
     BOARD_X = None
     BOARD_Y = None
-    
+
     SQUARE_TYPES = {}
     SQUARE_COORDS = {}
     TILES = {}
