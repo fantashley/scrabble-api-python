@@ -6,6 +6,9 @@ class ScrabbleBoard(BoardGame):
     BOARD_X = 15
     BOARD_Y = 15
 
+    DEFAULT_SQUARE = "PLAIN"
+    INITIAL_TILE_COUNT = 7
+
     SQUARE_TYPES = {
         "PLAIN": BoardGame.SquareMultiplier(1, 1),
         "STAR": BoardGame.SquareMultiplier(1, 1),
@@ -70,5 +73,5 @@ class ScrabbleBoard(BoardGame):
         'Z': BoardGame.Tile(1, 10)
     }
 
-    def __init__(self):
-        super().__init__("PLAIN")
+    def __init__(self, player_count):
+        super().__init__(player_count)
